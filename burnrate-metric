@@ -1,0 +1,37 @@
+#!/bin/bash
+#
+# Make sure all our parameters are set before we call burnrate_collect_data.py
+
+validate_parameters(){
+  ERRORS=""
+  if [ -z ${GROK_SERVER} ]; then
+    echo "You need to set GROK_SERVER!"
+    ERRORS=1
+  fi
+  if [ -z ${GROK_API_KEY} ]; then
+    echo "You need to set GROK_API_KEY!"
+    ERRORS=1
+  fi
+  if [ -z ${AWS_ACCESS_KEY_ID} ]; then
+    echo "You need to set AWS_ACCESS_KEY_ID!"
+    ERRORS=1
+  fi
+  if [ -z ${AWS_SECRET_ACCESS_KEY} ]; then
+    echo "You need to set AWS_SECRET_ACCESS_KEY!"
+    ERRORS=1
+  fi
+
+  if [ ! -z "${ERRORS}" ]; then
+    exit 1
+  fi
+}
+
+validate_parameters
+
+touch /metrics/burn.csv
+
+/usr/local/bin/burnrate_collect_data -brpt \
+  -s ${GROK_SERVER} \
+  -k ${GROK_API_KEY} \
+  --verbose \
+  -o /metrics/burn.csv $@
