@@ -58,4 +58,5 @@ end
 task :b => [:build]
 task :default => [:help]
 task :h => [:history]
+task :p => [:push]
 task :t => [:test]
