@@ -13,7 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License
 
-CONTAINER_NAME="grok/burnrate"
+if not ENV.has_key?('CONTAINER_NAME')
+  CONTAINER_NAME="grok/burnrate"
+else
+  CONTAINER_NAME=ENV['CONTAINER_NAME']
+end
 
 # Load GROK_SERVER and GROK_API_KEY from environment if present
 if not ENV.has_key?('GROK_SERVER')
@@ -44,7 +48,6 @@ end
 desc "test #{CONTAINER_NAME} container"
 task :test => [:build] do
   sh %{ docker run --rm -i -e GROK_SERVER="#{GROK_SERVER}" -e GROK_API_KEY="#{GROK_API_KEY}" -t #{CONTAINER_NAME}  /bin/bash }
-  # sh %{ docker run --rm -i -t #{CONTAINER_NAME} -e GROK_SERVER="#{GROK_SERVER}" -e GROK_API_KEY="#{GROK_API_KEY}" /bin/bash }
 end
 
 desc "history of #{CONTAINER_NAME}"
