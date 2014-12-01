@@ -15,6 +15,15 @@ This tool calculates the following metrics on an AWS account's EC2 instances:
 - Total number of all instance types
 - Number of all instance types by region
 
+Setup
+-----
+The burnrate scripts require grokcli and boto. Install them with
+`pip install boto grokcli`
+
+Your linux distribution may require you to install pip first. To install pip
+on CentOS 7, you'll have to install epel and python-pip with
+`yum install epel-release -y && yum install -y python-pip`
+
 Usage
 -----
 
@@ -34,8 +43,10 @@ This example records all possible metrics (see options).
 
 export AWS_ACCESS_KEY_ID={ACCESS_KEY}
 export AWS_SECRET_ACCESS_KEY={SECRET}
+GROK_SERVER="https://yourEC2instance.example.com"
+GROK_KEY=abc123
   
-/usr/local/bin/burnrate_collect_data.py -s https://example.com -k {grok-key} -brpt
+/usr/local/bin/burnrate_collect_data.py -s ${GROK_SERVER} -k ${GROK_KEY} -brpt
 ```
 **Import existing burnrates:**
 `/usr/local/bin/burnrates/burnrate_collect_data.py -s https://example.com -k {grok-key} -i oldburnrates.csv`
