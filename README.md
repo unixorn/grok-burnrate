@@ -39,7 +39,7 @@ Your linux distribution may require you to install pip first. To install pip on 
 
 1. Install git and pip with `sudo yum install -y git python26-pip`
 2. Install boto and grokcli with `sudo pip install boto grokcli`
-3. Clone the burnrate repo with `git clone git@github.com:GrokSolutions/grok-burnrate.git`
+3. Clone the burnrate repo with `git clone git@github.com:NumentaCorp/grok-burnrate.git`
 4. Test by running it manually with `grok-burnrate/burnrate_collect_data -brpt -s YOUR_GROK_SERVER -k YOUR_API_KEY --verbose -o /path/to/ouput.csv`
 
 You should see the following output:
